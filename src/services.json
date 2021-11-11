@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Primary Care Visit",
+    "price": 500
+  },
+  {
+    "id": 2,
+    "name": "Blood Test",
+    "price": 40
+  },
+  {
+    "id": 3,
+    "name": "Labs",
+    "price": 80
+  },
+  {
+    "id": 4,
+    "name": "Pharmacy",
+    "price": 120
+  }
+]

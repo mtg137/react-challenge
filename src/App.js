@@ -1,12 +1,17 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import UserList from './components/UserList';
+import UserForm from './components/UserForm';
+import AppointmentForm from './components/AppointmentForm';
+import Home from './components/Home';
+
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<UserList />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/new-user" element={<UserForm />} />
+        <Route path="/new-appointment" element={<AppointmentForm />} />
       </Routes>
     </BrowserRouter>
   );
