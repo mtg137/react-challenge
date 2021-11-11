@@ -1,0 +1,15 @@
+.section {
+  margin: 20px 10px;
+}
+
+.section .title {
+  margin-bottom: 10px;
+}
+
+.section .list {
+  margin-bottom: 5px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
