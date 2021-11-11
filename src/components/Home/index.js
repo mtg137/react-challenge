@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { usersSelector, appointmentsSelector } from '../../state/app/app.selector';
 import './style.css';
 
 const Home = (props) => {
+  const [searchText, setSearchText] = useState('');
   const users = useSelector(usersSelector);
   const appointments = useSelector(appointmentsSelector);
+
+  const changeSearchText = (e) => {
+    setSearchText(e.target.value)
+  }
 
   return (
     <div>
@@ -25,6 +30,8 @@ const Home = (props) => {
 
       <div className="section">
         <h2 className="title">Appointments:</h2>
+
+        <input type="text" value={searchText} onChange={changeSearchText} />
         <table className="list">
           <thead>
             <tr>
@@ -36,15 +43,27 @@ const Home = (props) => {
 
           <tbody>
             {
-              appointments.map(appointment => (
-                <tr key={appointment.id}>
-                  <th>{appointment.user.name}</th>
-                  <th>{appointment.datetime}</th>
-                  <th>
-                    {appointment.services.map(service => service.name).join(', ')} ( ${appointment.total} )
-                  </th>
-                </tr>
-              ))
+              appointments.map(appointment => {
+                let valid = appointment.user.name.includes(searchText);
+
+                if (!valid) {
+                  for (const service of appointment.services) {
+                    if (service.name.includes(searchText)) {
+                      valid = true;
+                    }
+                  }
+                }
+
+                return valid ? (
+                  <tr key={appointment.id}>
+                    <th>{appointment.user.name}</th>
+                    <th>{appointment.datetime}</th>
+                    <th>
+                      {appointment.services.map(service => service.name).join(', ')} ( ${appointment.total} )
+                    </th>
+                  </tr>
+                ) : <></>
+              })
             }
           </tbody>
         </table>
